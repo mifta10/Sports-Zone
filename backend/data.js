@@ -1,7 +1,23 @@
+import bcrypt from 'bcryptjs';
 const data = {
+  users: [
+    {
+      name: 'Mifta',
+      email: 'admin@example.com',
+      password: bcrypt.hashSync('1234', 8),
+      isAdmin: true,
+    },
+    {
+      name: 'John',
+      email: 'user@example.com',
+      password: bcrypt.hashSync('1234', 8),
+      isAdmin: false,
+    },
+  ],
+
     products: [
       {
-        _id: '1',
+      
         name: 'Adidas Unifornia Boot',
         category: 'Football',
         image: 'https://i.ibb.co/0XLCyQS/Adidas-Uniforia.jpg',
@@ -13,7 +29,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '2',
+        
         name: 'Australia Cricket Premium Jersey',
         category: 'Cricket',
         image: 'https://i.ibb.co/SJ4JgxM/Australia-Premium-Jersey.jpg',
@@ -25,7 +41,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '3',
+        
         name: 'Authentic Football Kit',
         category: 'Football',
         image: 'https://i.ibb.co/wMv5c2H/Authentic-Football-Kit.jpg',
@@ -37,7 +53,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '4',
+        
         name: 'Barcelona Premium Kit',
         category: 'Football',
         image: 'https://i.ibb.co/XCBZNzS/Barcelona-Premium-Replica.jpg',
@@ -49,7 +65,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '5',
+        
         name: 'Bangladesh Cricket WC2019 Premium',
         category: 'Cricket',
         image: 'https://i.ibb.co/3MbFrpS/BD-Cricket-Jersey.jpg',
@@ -61,7 +77,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '6',
+        
         name: 'Nike Premium Boot',
         category: 'Football',
         image: 'https://i.ibb.co/bmw2HdQ/Best-Nike-Boot.jpg',
@@ -73,7 +89,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '7',
+        
         name: 'Burrusia Dortmund Premium Home Kit',
         category: 'Football',
         image: 'https://i.ibb.co/nwH41j7/Burrusia-Dortmond-Home-Kit.jpg',
@@ -85,7 +101,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '8',
+        
         name: 'Customized Cricket Jersey',
         category: 'Cricket',
         image: 'https://i.ibb.co/FYQtsmq/Customized-Jersey-Green.jpg',
@@ -97,7 +113,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '9',
+        
         name: 'Grey Nicols Kit',
         category: 'Cricket',
         image: 'https://i.ibb.co/yX5CKKN/GN-Premium-Cricket-Kit.jpg',
@@ -109,7 +125,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '10',
+        
         name: 'New Balance Kit',
         category: 'Cricket',
         image: 'https://i.ibb.co/Mcw9dc1/NB-Premium-KIT-cricket.jpg',
@@ -121,7 +137,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '11',
+        
         name: 'Official New Zealand Jersey',
         category: 'Cricket',
         image: 'https://i.ibb.co/tCwWXTf/New-Zealand.jpg',
@@ -133,7 +149,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '12',
+        
         name: 'Nike Premium Boot(Pink Edition)',
         category: 'Football',
         image: 'https://i.ibb.co/VHFkCHq/Nike-Boot.jpg',
@@ -145,7 +161,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '13',
+        
         name: 'SG Cricket Kit',
         category: 'Cricket',
         image: 'https://i.ibb.co/cQyBmYK/SG-premium-cricket-kit.jpg',
@@ -157,7 +173,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '14',
+        
         name: 'New Balance Spike Boot White Edition',
         category: 'Cricket',
         image: 'https://i.ibb.co/x2xjR2F/NB-Cricket-Boot.jpg',
@@ -169,7 +185,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '15',
+        
         name: 'SS Cricket Kit',
         category: 'Cricket',
         image: 'https://i.ibb.co/nfhknxn/SS-Original-Master.jpg',
