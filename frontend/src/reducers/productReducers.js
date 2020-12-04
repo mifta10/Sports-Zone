@@ -125,7 +125,7 @@ const {
       case PRODUCT_REVIEW_CREATE_FAIL:
         return { loading: false, error: action.payload };
       case PRODUCT_REVIEW_CREATE_RESET:
-        return {loading:true};
+        return {};
       default:
         return state;
     }
