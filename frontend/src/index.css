@@ -1,8 +1,8 @@
-
 html {
   font-size: 62.5%; /* 16px x 62.5 = 10px = 1rem */
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   height: 100vh;
@@ -11,8 +11,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-#root{
-  height:100%;
+#root {
+  height: 100%;
 }
 
 /* Layout */
@@ -86,6 +86,7 @@ button:hover {
   border: 0.1rem #404040 solid;
 }
 button.primary {
+
   background-color: #f0c040;
 }
 button.block {
@@ -94,17 +95,15 @@ button.block {
 button.small {
   font-size: 1.2rem;
 }
-.signin{
-    color:#fff;
-    border:2px solid transparent;
-    border-radius:20px ;
-    background-image: linear-gradient(#42455a,#42455a),radial-gradient(circle at top left, #798074,#c9bb16);
-    background-origin: border-box;
-    background-clip: content-box,border-box; 
-  
+/*icon*/
+.fa-bars{
+  padding:.4rem;
 }
-.cart .fa{
-  
+
+.fa-shopping-cart,
+.fa-sign-in,
+.fa-users,
+.fa-user{
   padding: .5rem;
 }
 /* Header */
@@ -115,7 +114,7 @@ header a {
 a.brand {
   color: #ffffff;
   font-size: 3rem;
-  font-weight: bold;
+  font-weight: 900;
   font-family: 'Sacramento', cursive;
 }
 .badge {
@@ -138,16 +137,36 @@ a.brand {
 .row.top {
   align-items: flex-start;
 }
+.row.start {
+  justify-content: flex-start;
+}
 .col-1 {
   flex: 1 1 25rem;
 }
 .col-2 {
   flex: 2 1 50rem;
 }
+.col-3 {
+  flex: 32 1 75rem;
+}
 .min-30 {
   min-width: 30rem;
 }
-
+.p-1 {
+  padding: 1rem;
+}
+.zone{
+  color: #f0c040;
+}
+.sports{
+  color:#b5bab7;
+}
+footer{
+  font-family: 'Pacifico', cursive;
+}
+.foot{
+  color: #f0c040;
+}
 /* Aside */
 aside {
   position: fixed;
@@ -184,25 +203,22 @@ aside li {
 button.close-sidebar {
   padding: 0.3rem 0.8rem;
 }
+
 /* Image */
- 
 img {
   border-radius: 0.5rem;
 }
 img.small {
   max-width: 5rem;
   width: 100%;
-  
 }
 img.medium {
   max-width: 29rem;
   width: 100%;
   height:26rem;
-  
 }
 img.large {
   width: 85%;
-  
 }
 
 /* Card */
@@ -226,16 +242,6 @@ img.large {
   color: #f0c040;
   margin: 0.1rem;
 }
-.brand{
-  letter-spacing: 2px;
-}
-.zone{
-  color: #c9bb16;
-}
-.sports{
-  color: #798074;
-}
-/*rating*/
 .rating span:last-child {
   color: #404040;
 }
@@ -249,7 +255,6 @@ img.large {
 .danger {
   color: #a02020;
 }
-
 .alert {
   padding: 1rem;
   border: 0.1rem solid transparent;
@@ -267,7 +272,7 @@ img.large {
   color: #20a020;
   background-color: #eeffe0;
 }
-
+/* Form */
 .form {
   max-width: 60rem;
   margin: 0 auto;
@@ -280,7 +285,6 @@ img.large {
 .form label {
   margin: 1rem 0;
 }
-
 /* Dropdown */
 .dropdown {
   display: inline-block;
@@ -301,7 +305,6 @@ img.large {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
 /* Checkout Steps */
 .checkout-steps > div {
   border-top: 0.3rem #c0c0c0 solid;
@@ -314,7 +317,6 @@ img.large {
   border-top-color: #f08000;
   color: #f08000;
 }
-
 /* Table */
 .table {
   width: 100%;
@@ -335,17 +337,79 @@ img.large {
 
 /* Search */
 .search button {
-  /*margin-left: 1rem;*/
   border-radius: 0 0.5rem 0.5rem 0;
   border-right: none;
   margin-right: 0.5rem;
-  height:4rem;
 }
 .search input {
   border-radius: 0.5rem 0 0 0.5rem;
   border-right: none;
- }
-
- .active {
+  margin-left: 0.5rem;
+}
+.active {
   font-weight: bold;
+}
+
+/* Map */
+.full-container {
+  margin: -1rem;
+  height: calc(100% + 2rem);
+}
+.map-input-box {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0.5rem auto;
+  width: 25rem;
+  height: 4rem;
+  display: flex;
+}
+.map-input-box input {
+  border-radius: 1rem 0 0 1rem;
+  border-right: 0;
+}
+.map-input-box button {
+  border-radius: 0 1rem 1rem 0;
+  border-left: 0;
+}
+
+.slider{
+  margin: auto;
+  max-width:1300px;
+  background: #000;
+}
+.slider-img{
+  display: grid;
+  place-items: center;
+}
+.slider-img > div{
+
+  width:100%;display: grid;
+  place-items: center;
+}
+.slider-img > div>img{
+  width:70%;
+  height:280px;
+  object-fit: cover;
+  display: grid;
+  place-items: center;
+}
+.slick-prev:before{
+  font-size: 30px !important;
+  color: gray !important;
+  z-index: 100;
+  
+}
+.slick-next:before {
+  font-size: 30px !important;
+  color: gray !important;
+  z-index: 100;
+  
+}
+.slick-prev {
+  left: 15px !important;
+}
+.slick-next {
+  right: 20px !important;
 }

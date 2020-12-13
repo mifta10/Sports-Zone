@@ -4,6 +4,7 @@ import { deleteUser, listUsers } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { USER_DETAILS_RESET } from '../constants/userConstants';
+
 export default function UserListScreen(props) {
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
@@ -15,14 +16,13 @@ export default function UserListScreen(props) {
     success: successDelete,
   } = userDelete;
 
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listUsers());
     dispatch({
       type: USER_DETAILS_RESET,
     });
-   }, [dispatch, successDelete]);
+  }, [dispatch, successDelete]);
   const deleteHandler = (user) => {
     if (window.confirm('Are you sure?')) {
       dispatch(deleteUser(user._id));
@@ -61,7 +61,7 @@ export default function UserListScreen(props) {
                 <td>{user.isSeller ? 'YES' : ' NO'}</td>
                 <td>{user.isAdmin ? 'YES' : 'NO'}</td>
                 <td>
-                <button
+                  <button
                     type="button"
                     className="small"
                     onClick={() => props.history.push(`/user/${user._id}/edit`)}

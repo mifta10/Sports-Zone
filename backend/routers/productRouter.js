@@ -2,7 +2,7 @@ import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import Product from '../models/productModel.js';
-import { isAdmin, isAuth } from '../utils.js';
+import { isAdmin, isAuth, isSellerOrAdmin } from '../utils.js';
 
 const productRouter = express.Router();
 
@@ -11,6 +11,7 @@ productRouter.get(
   expressAsyncHandler(async (req, res) => {
     const name = req.query.name || '';
     const category = req.query.category || '';
+    const seller = req.query.seller || '';
     const order = req.query.order || '';
     const min =
       req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
@@ -20,7 +21,9 @@ productRouter.get(
       req.query.rating && Number(req.query.rating) !== 0
         ? Number(req.query.rating)
         : 0;
+
     const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
+    const sellerFilter = seller ? { seller } : {};
     const categoryFilter = category ? { category } : {};
     const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
     const ratingFilter = rating ? { rating: { $gte: rating } } : {};
@@ -36,14 +39,13 @@ productRouter.get(
     const products = await Product.find({
       ...nameFilter,
       ...categoryFilter,
-     ...priceFilter,
+      ...priceFilter,
       ...ratingFilter,
-    })
-      .populate()
-      .sort(sortOrder);
+    }).sort(sortOrder);
     res.send(products);
   })
 );
+
 productRouter.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
@@ -64,7 +66,10 @@ productRouter.get(
 productRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate(
+      'seller',
+      'seller.name seller.logo seller.rating seller.numReviews'
+    );
     if (product) {
       res.send(product);
     } else {
@@ -76,10 +81,11 @@ productRouter.get(
 productRouter.post(
   '/',
   isAuth,
-  isAdmin,
+  isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
-       name: 'sample name ' + Date.now(),
+      name: 'sample name ' + Date.now(),
+      seller: req.user._id,
       image: '/images/p1.jpg',
       price: 0,
       category: 'sample category',
@@ -93,11 +99,10 @@ productRouter.post(
     res.send({ message: 'Product Created', product: createdProduct });
   })
 );
-
 productRouter.put(
   '/:id',
   isAuth,
-  isAdmin,
+  isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -164,6 +169,5 @@ productRouter.post(
     }
   })
 );
-
 
 export default productRouter;

@@ -25,12 +25,12 @@ import SearchScreen from './screens/SearchScreen';
 import { listProductCategories } from './actions/productActions';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
+import MapScreen from './screens/MapScreen';
 
 function App() {
   const cart = useSelector((state) => state.cart);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const { cartItems } = cart;
-
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
@@ -47,33 +47,32 @@ function App() {
   useEffect(() => {
     dispatch(listProductCategories());
   }, [dispatch]);
-
   return (
     <BrowserRouter>
-    <div className="grid-container">
-      <header className="row">
-        <div>
-        <button
+      <div className="grid-container">
+        <header className="row">
+          <div>
+            <button
               type="button"
               className="open-sidebar"
               onClick={() => setSidebarIsOpen(true)}
             >
               <i className="fa fa-bars"></i>
             </button>
-          <Link className="brand" to="/">
-            <span className="sports">Sports</span> <span className="zone">Zone</span>
-          </Link>
-        </div>
-        <div>
+            <Link className="brand" to="/">
+              <span className="sports">Sports</span> <span className="zone">Zone</span>
+            </Link>
+          </div>
+          <div>
             <Route
               render={({ history }) => (
                 <SearchBox history={history}></SearchBox>
               )}
             ></Route>
           </div>
-        <div>
-        <Link className="cart" to="/cart">
-          <i class="fa fa-shopping-cart"></i>
+          <div>
+            <Link className="cart" to="/cart">
+             <i class="fa fa-shopping-cart"></i>
               Cart
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
@@ -81,14 +80,15 @@ function App() {
             </Link>
             {userInfo ? (
               <div className="dropdown">
-                <Link to="#">
+                <Link className="user" to="#">
+                <i class="fa fa-users"></i>
                   {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
                 </Link>
                 <ul className="dropdown-content">
-                <li>
+                  <li>
                     <Link to="/profile">User Profile</Link>
                   </li>
-                <li>
+                  <li>
                     <Link to="/orderhistory">Order History</Link>
                   </li>
                   <li>
@@ -99,17 +99,15 @@ function App() {
                 </ul>
               </div>
             ) : (
-              <button className="signin"><Link to="/signin" className="signin-btn">Sign In</Link></button>
+              <Link to="/signin"><i class="fa fa-sign-in"></i>Sign In</Link>
             )}
-             {userInfo && userInfo.isAdmin && (
+            {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
-                <Link to="#admin">
+                <Link className="admin" to="#admin">
+                <i class="fa fa-user"></i>
                   Admin <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
-                  <li>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
                   <li>
                     <Link to="/productlist">Products</Link>
                   </li>
@@ -122,9 +120,9 @@ function App() {
                 </ul>
               </div>
             )}
-        </div>
-      </header>
-      <aside className={sidebarIsOpen ? 'open' : ''}>
+          </div>
+        </header>
+        <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
             <li>
               <strong>Categories</strong>
@@ -154,7 +152,7 @@ function App() {
             )}
           </ul>
         </aside>
-      <main>
+        <main>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen} exact></Route>
           <Route
@@ -174,7 +172,7 @@ function App() {
             component={SearchScreen}
             exact
           ></Route>
-           <Route
+          <Route
             path="/search/category/:category"
             component={SearchScreen}
             exact
@@ -184,7 +182,7 @@ function App() {
             component={SearchScreen}
             exact
           ></Route>
-           <Route
+          <Route
             path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
             component={SearchScreen}
             exact
@@ -193,23 +191,26 @@ function App() {
             path="/profile"
             component={ProfileScreen}
           ></PrivateRoute>
+          <PrivateRoute path="/map" component={MapScreen}></PrivateRoute>
           <AdminRoute
             path="/productlist"
             component={ProductListScreen}
+            exact
           ></AdminRoute>
-            <AdminRoute
+          <AdminRoute
             path="/orderlist"
             component={OrderListScreen}
+            exact
           ></AdminRoute>
-         <AdminRoute path="/userlist" component={UserListScreen}></AdminRoute>
-         <AdminRoute
+          <AdminRoute path="/userlist" component={UserListScreen}></AdminRoute>
+          <AdminRoute
             path="/user/:id/edit"
             component={UserEditScreen}
           ></AdminRoute>
           <Route path="/" component={HomeScreen} exact></Route>
-      </main>
-      <footer className="row center">All rights reserved @Sports Zone,2020</footer>
-    </div>
+        </main>
+        <footer className="row center">all rights reserved &copy;<a className="foot" href="www.facebook.com">Sports Zone</a>,2020</footer>
+      </div>
     </BrowserRouter>
   );
 }

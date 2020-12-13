@@ -60,7 +60,6 @@ export default function ProductEditScreen(props) {
       })
     );
   };
-
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [errorUpload, setErrorUpload] = useState('');
 
@@ -85,7 +84,6 @@ export default function ProductEditScreen(props) {
       setLoadingUpload(false);
     }
   };
-
 
   return (
     <div>

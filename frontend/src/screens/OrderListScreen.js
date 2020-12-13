@@ -6,9 +6,9 @@ import MessageBox from '../components/MessageBox';
 import { ORDER_DELETE_RESET } from '../constants/orderConstants';
 
 export default function OrderListScreen(props) {
+  const sellerMode = props.match.path.indexOf('/seller') >= 0;
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
-
   const orderDelete = useSelector((state) => state.orderDelete);
   const {
     loading: loadingDelete,
@@ -16,13 +16,14 @@ export default function OrderListScreen(props) {
     success: successDelete,
   } = orderDelete;
 
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: ORDER_DELETE_RESET });
-    dispatch(listOrders());
-  }, [dispatch, successDelete]);
+    dispatch(listOrders({ seller: sellerMode ? userInfo._id : '' }));
+  }, [dispatch, sellerMode, successDelete, userInfo._id]);
   const deleteHandler = (order) => {
-    // TODO: delete handler
     if (window.confirm('Are you sure to delete?')) {
       dispatch(deleteOrder(order._id));
     }
@@ -32,7 +33,6 @@ export default function OrderListScreen(props) {
       <h1>Orders</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
-
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -42,7 +42,6 @@ export default function OrderListScreen(props) {
           <thead>
             <tr>
               <th>ID</th>
-              <th>USER</th>
               <th>DATE</th>
               <th>TOTAL</th>
               <th>PAID</th>
@@ -54,7 +53,6 @@ export default function OrderListScreen(props) {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
-                <td>{order.name}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
@@ -76,7 +74,7 @@ export default function OrderListScreen(props) {
                   <button
                     type="button"
                     className="small"
-                   onClick={() => deleteHandler(order)}
+                    onClick={() => deleteHandler(order)}
                   >
                     Delete
                   </button>

@@ -7,7 +7,6 @@ import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating';
 import { PRODUCT_REVIEW_CREATE_RESET } from '../constants/productConstants';
 
-
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
   const productId = props.match.params.id;
@@ -36,7 +35,6 @@ export default function ProductScreen(props) {
     }
     dispatch(detailsProduct(productId));
   }, [dispatch, productId, successReviewCreate]);
-  
   const addToCartHandler = () => {
     props.history.push(`/cart/${productId}?qty=${qty}`);
   };
@@ -50,10 +48,9 @@ export default function ProductScreen(props) {
       alert('Please enter comment and rating');
     }
   };
-
   return (
     <div>
-       {loading ? (
+      {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
@@ -209,7 +206,7 @@ export default function ProductScreen(props) {
             </ul>
           </div>
         </div>
-       )}
-        </div>
+      )}
+    </div>
   );
-  }
+}

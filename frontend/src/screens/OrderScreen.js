@@ -25,14 +25,12 @@ export default function OrderScreen(props) {
     error: errorPay,
     success: successPay,
   } = orderPay;
-
   const orderDeliver = useSelector((state) => state.orderDeliver);
   const {
     loading: loadingDeliver,
     error: errorDeliver,
     success: successDeliver,
   } = orderDeliver;
-
   const dispatch = useDispatch();
   useEffect(() => {
     const addPayPalScript = async () => {
@@ -72,7 +70,7 @@ export default function OrderScreen(props) {
   const deliverHandler = () => {
     dispatch(deliverOrder(order._id));
   };
-
+  console.log(order);
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -188,20 +186,23 @@ export default function OrderScreen(props) {
                     <LoadingBox></LoadingBox>
                   ) : (
                     <>
-                    {errorPay && (
-                      <MessageBox variant="danger">{errorPay}</MessageBox>
-                    )}
-                    {loadingPay && <LoadingBox></LoadingBox>}
+                      {errorPay && (
+                        <MessageBox variant="danger">{errorPay}</MessageBox>
+                      )}
+                      {loadingPay && <LoadingBox></LoadingBox>}
 
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHandler}
-                    ></PayPalButton>
-                  </>
+                      {
+                        order.paymentMethod==="PayPal" ? <PayPalButton
+                        amount={order.totalPrice}
+                        onSuccess={successPaymentHandler}
+                      ></PayPalButton>: <strong className="success">Your Order is Placed</strong>
+                      
+                      }
+                    </>
                   )}
                 </li>
               )}
-               {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+              {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   {errorDeliver && (
