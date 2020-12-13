@@ -209,7 +209,7 @@ function App() {
           ></AdminRoute>
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
-        <footer className="row center">all rights reserved &copy;<a className="foot" href="www.facebook.com">Sports Zone</a>,2020</footer>
+        <footer className="row center">all rights reserved &copy;<a className="foot" href="https://www.facebook.com/tahmid.khan.9275/" rel="noopener noreferrer" target="_blank">Sports Zone</a>,2020</footer>
       </div>
     </BrowserRouter>
   );
