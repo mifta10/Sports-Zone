@@ -171,7 +171,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mifta10/Sports-Zone.git"
+    "url": "git+https://github.com/mifta10/Sports-Zone.git",
+    "engines": {"node":"12.4.0", "npm": "6.9.0"}
   },
   "author": "",
   "license": "ISC",
