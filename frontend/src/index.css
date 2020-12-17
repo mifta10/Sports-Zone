@@ -15,6 +15,7 @@ body {
   height: 100%;
 }
 
+
 /* Layout */
 .grid-container {
   display: grid;
@@ -106,6 +107,7 @@ button.small {
 .fa-user{
   padding: .5rem;
 }
+
 /* Header */
 header a {
   color: #ffffff;
@@ -227,12 +229,18 @@ img.large {
   background-color: #f8f8f8;
   border-radius: 0.5rem;
   margin: 1rem;
+  transform: translateY(10px);
+  transition: 0.3s all;
 }
 .card-body {
   padding: 1rem;
 }
 .card-body > * {
   margin-bottom: 0.5rem;
+}
+.card:hover{
+  opacity: 1;
+  transform: translateY(0px);
 }
 .price {
   font-size: 2rem;
