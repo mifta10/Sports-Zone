@@ -106,7 +106,6 @@
     "multer": "^1.4.2",
     "negotiator": "^0.6.2",
     "node": "^15.4.0",
-    "nodemon": "^2.0.6",
     "nopt": "^1.0.10",
     "normalize-path": "^3.0.0",
     "normalize-url": "^4.5.0",
@@ -182,5 +181,8 @@
   "bugs": {
     "url": "https://github.com/mifta10/Sports-Zone/issues"
   },
-  "homepage": "https://github.com/mifta10/Sports-Zone#readme"
+  "homepage": "https://github.com/mifta10/Sports-Zone#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }
