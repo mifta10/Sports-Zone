@@ -13,7 +13,7 @@ const app = express();
 
 app.use(cors(
   {
-    origin: ["https://sports-zone-api.vercel.app"],
+    origin: ["https://sports-zone-api.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true
   }
